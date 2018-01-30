@@ -98,7 +98,7 @@ public class BlueRight extends LinearOpMode {
         sleep(500);
         drive.DriveForwardDistance(0.3,1);
         sleep(500);
-        drive.TurnLeftDegree(0.2, 96); //used to 86
+        drive.TurnDegrees(0.2, 90); //used to 86
         sleep(500);
 
         switch (vuMark) {
@@ -107,7 +107,7 @@ public class BlueRight extends LinearOpMode {
                 sleep(500);
                 drive.StrafeRightDistance(0.75,5); //used ti be (0.5,3)
                 sleep(500);
-                drive.TurnLeftDegree(0.3,96);
+                drive.TurnDegrees(0.3,90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -119,7 +119,7 @@ public class BlueRight extends LinearOpMode {
                 sleep(500);
                 drive.StrafeRightDistance(0.75,5);
                 sleep(500);
-                drive.TurnLeftDegree(0.3,95);
+                drive.TurnDegrees(0.3,90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -131,7 +131,7 @@ public class BlueRight extends LinearOpMode {
                 sleep(500);
                 drive.StrafeRightDistance(0.75,5);
                 sleep(500);
-                drive.TurnLeftDegree(0.3,96);
+                drive.TurnDegrees(0.3,90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -143,7 +143,7 @@ public class BlueRight extends LinearOpMode {
                 sleep(500);
                 drive.StrafeRightDistance(0.75,5);
                 sleep(500);
-                drive.TurnLeftDegree(0.3,96);
+                drive.TurnDegrees(0.3,90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);

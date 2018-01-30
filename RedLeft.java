@@ -73,7 +73,7 @@ public class RedLeft extends LinearOpMode {
         sleep(500);
         drive.DriveForwardDistance(0.3,1);
         sleep(500);
-        drive.TurnRightDegree(0.2, 96); //see blue right
+        drive.TurnDegrees(0.2, -90); //see blue right
         sleep(500);
 
         switch (vuMark) {
@@ -82,7 +82,7 @@ public class RedLeft extends LinearOpMode {
                 sleep(500);
                 drive.StrafeLeftDistance(0.75,5); // didnt mirror
                 sleep(500);
-                drive.TurnRightDegree(0.3,96);
+                drive.TurnDegrees(0.3,-90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -94,7 +94,7 @@ public class RedLeft extends LinearOpMode {
                 sleep(500);
                 drive.StrafeLeftDistance(0.75,5);
                 sleep(500);
-                drive.TurnRightDegree(0.3,95);
+                drive.TurnDegrees(0.3,-90);
                  sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -106,7 +106,7 @@ public class RedLeft extends LinearOpMode {
                 sleep(500);
                 drive.StrafeLeftDistance(0.75,5);
                 sleep(500);
-                drive.TurnRightDegree(0.3,96);
+                drive.TurnDegrees(0.3,-90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -118,7 +118,7 @@ public class RedLeft extends LinearOpMode {
                 sleep(500);
                 drive.StrafeLeftDistance(0.75,5);
                 sleep(500);
-                drive.TurnRightDegree(0.3,96);
+                drive.TurnDegrees(0.3,-90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);

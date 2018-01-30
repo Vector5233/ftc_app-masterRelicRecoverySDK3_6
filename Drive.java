@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import java.util.Timer;
+
 /**
  * Created by CCA on 11/16/2017.
  */
@@ -189,6 +191,7 @@ public class Drive extends Object {
     }
 
     public void StrafeRightDistance(double power, double distance) {
+
         // distance in inches
         //conjecture instead of moving 12", wheels will go 12"*cos(45)= 8.5"
         int ticks = (int) (distance * TICKS_PER_INCH);
@@ -219,6 +222,7 @@ public class Drive extends Object {
         frontRight.setPower(power);
         backLeft.setPower(power);
         backRight.setPower(power);
+
 
         while (frontRight.isBusy() && frontLeft.isBusy()) ;
 

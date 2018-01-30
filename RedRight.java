@@ -102,7 +102,7 @@ public class RedRight extends LinearOpMode {
             case LEFT: {
                 drive. DriveForwardDistance(0.5,25);
                 sleep(500);
-                drive. TurnRightDegree(0.5,80);
+                drive. TurnDegrees(0.5,-90);
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22); //previously 25
                 sleep(500);
@@ -116,7 +116,7 @@ public class RedRight extends LinearOpMode {
             case RIGHT: {
                 drive. DriveForwardDistance(0.5,25);
                 sleep(500);
-                drive. TurnRightDegree(0.5,80);
+                drive. TurnDegrees(0.5,-90);
                 sleep(500);
                 drive. DriveForwardDistance(0.5, 22);
                 sleep(500);
@@ -130,7 +130,7 @@ public class RedRight extends LinearOpMode {
             case CENTER: {
                 drive. DriveForwardDistance(0.5,25);
                 sleep(500);
-                drive. TurnRightDegree(0.5,80);
+                drive. TurnDegrees(0.5,-90);
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22);
                 sleep(500);
@@ -144,7 +144,7 @@ public class RedRight extends LinearOpMode {
             default:{
                 drive. DriveForwardDistance(0.5,25);
                 sleep(500);
-                drive. TurnRightDegree(0.5,80);
+                drive. TurnDegrees(0.5,-90);
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22);
                 sleep(500);
