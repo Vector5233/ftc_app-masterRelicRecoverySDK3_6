@@ -123,7 +123,7 @@ public class RedRight extends LinearOpMode {
                 drive. DriveForwardDistance(0.5, 22);
                 sleep(500);
                 drive. StrafeRightDistance(0.3,15);//previously 20
-                sleep(500); 
+                sleep(500);
                 //drive. DriveForwardDistance(0.5,12);
                 //sleep(500);
                 drive. DeliverGlyph();
