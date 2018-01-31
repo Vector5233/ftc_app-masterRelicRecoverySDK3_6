@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -11,7 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /**
  * Created by CCA on 8/16/2017.
  */
-
+@Disabled
 @TeleOp(name="RevRoboticsOpSinglePlayer", group = "myGroup")
 public class RevRoboticsOpSinglePlayer extends OpMode {
 
@@ -27,9 +28,9 @@ public class RevRoboticsOpSinglePlayer extends OpMode {
     float Lt, Rt;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
-    final double RIGHTGrab_CLOSE = 0.33; //used to be 0.4
+    final double RIGHTGrab_CLOSE = 0.33;
     final double LEFTGrab_COMPLETEOPEN = 0.2;
-    final double LEFTGrab_CLOSE = 0.67; //used to be 0.6
+    final double LEFTGrab_CLOSE = 0.67;
     final double RIGHTGrab_OPEN = 0.5;
     final double LEFTGrab_OPEN = 0.5;
 
@@ -45,12 +46,10 @@ public class RevRoboticsOpSinglePlayer extends OpMode {
         backLeft = hardwareMap.dcMotor.get("backLeft");
         backRight = hardwareMap.dcMotor.get("backRight");
         liftMotor = hardwareMap.dcMotor.get("liftMotor");
-        //gyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "gyro");
 
-        //colorSensor = hardwareMap.colorSensor.get("color");
         jewelKnocker = hardwareMap.servo.get("jewel");
         jewelRaiser = hardwareMap.servo.get("raise");
-        jewelRaiser.setPosition(JEWEL_UP);  //JEWEL_UP
+        jewelRaiser.setPosition(JEWEL_UP);
         jewelKnocker.setPosition(JEWEL_CENTER);
 
         topRightGrab = hardwareMap.servo.get("topRightGrab");
@@ -82,53 +81,21 @@ public class RevRoboticsOpSinglePlayer extends OpMode {
     }
 
     public void loop() {
-// 2 Drive: movement + tasks
-        /*red = colorSensor.red();
-        green = colorSensor.green();
-        blue = colorSensor.blue();
-        */
-
-        /*telemetry.addData("Red: ", red);
-        telemetry.addData("Green: ", green);
-        telemetry.addData("Blue: ", blue);*/
-        //telemetry.addData("gyro: ",gyro.getIntegratedZValue());
         telemetry.addData("Front Left:", gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x);
         telemetry.addData("Back Right:", gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x);
 
-       /* if (gamepad1.dpad_up){
-
-            frontLeft.setPower(1.0);
-            frontRight.setPower(1.0);
-            backLeft.setPower(1.0);
-            backRight.setPower(1.0);
-
-        }
-
-        if (gamepad1.dpad_down){
-
-            frontLeft.setPower(-1.0);
-            frontRight.setPower(-1.0);
-            backLeft.setPower(-1.0);
-            backRight.setPower(-1.0);
-        }*/
-
         if (gamepad1.x) {
-
             frontLeft.setPower(-1.0);
             frontRight.setPower(1.0);
             backLeft.setPower(1.0);
             backRight.setPower(-1.0);
-
-
         }
 
         if (gamepad1.b) {
-
             frontLeft.setPower(1.0);
             frontRight.setPower(-1.0);
             backLeft.setPower(-1.0);
             backRight.setPower(1.0);
-
         }
 
         frontLeft.setPower(-gamepad1.left_stick_y/*+gamepad1.left_stick_x*/ + gamepad1.right_stick_x);
@@ -139,7 +106,7 @@ public class RevRoboticsOpSinglePlayer extends OpMode {
 
         if (gamepad1.a) {
             jewelRaiser.setPosition(JEWEL_DOWN);
-        } else// if (gamepad1.b)
+        } else
         {
             jewelRaiser.setPosition(JEWEL_UP);
         }
@@ -154,22 +121,14 @@ public class RevRoboticsOpSinglePlayer extends OpMode {
             jewelKnocker.setPosition(JEWEL_RIGHT);
         }
 
-
-        // trivial change
         if (gamepad1.dpad_up) {
             liftMotor.setPower(1.0);
         } else if (gamepad1.dpad_down) {
             liftMotor.setPower(-1.0);
         } else {
-            // liftMotor.setPower(0);
             liftMotor.setPower(.05);
         }
-        //options to fix lift fall--1. set small power to motor (.05), 2. use elastics to counter weight
 
-
-        //Binary system for grabbers
-
-        //if (gamepad2.left_bumper && gamepad2.right_bumper) {
         if (gamepad1.y) {
             topRightGrab.setPosition(RIGHTGrab_COMPLETEOPEN);
             topLeftGrab.setPosition(LEFTGrab_COMPLETEOPEN);

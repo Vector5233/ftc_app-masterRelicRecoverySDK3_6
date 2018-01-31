@@ -59,9 +59,9 @@ public class BlueRight extends LinearOpMode {
     float Lt, Rt;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
-    final double RIGHTGrab_CLOSE = 0.33; //used to be 0.4
+    final double RIGHTGrab_CLOSE = 0.33;
     final double LEFTGrab_COMPLETEOPEN = 0.2;
-    final double LEFTGrab_CLOSE = 0.67; //used to be 0.6
+    final double LEFTGrab_CLOSE = 0.67;
     final double RIGHTGrab_OPEN = 0.5;
     final double LEFTGrab_OPEN = 0.5;
     final double RIGHTBottom_CLOSE = 0.3;
@@ -83,7 +83,6 @@ public class BlueRight extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        //platform not balanced, drivebackward should have more distance, slide while turning left, drive forward should be further
         initialization();
         waitForStart();
         RelicRecoveryVuMark vuMark = ReadPictograph();
@@ -97,22 +96,20 @@ public class BlueRight extends LinearOpMode {
         sleep(500);
         liftMotor.setPower(0.0);
         ray.BlueKnocker();
-        //sleep(500); //Redundant
         drive.DriveForwardDistance(0.3,1);
         sleep(500);
-        drive.TurnDegrees(0.2, 90); //used to 86
+        drive.TurnDegrees(0.2, 90);
         sleep(500);
 
         switch (vuMark) {
+            //test again
             case LEFT: {
-                drive.DriveForwardDistance(0.5,23);//used to be 26
+                drive.DriveForwardDistance(0.5,23);
                 sleep(500);
-                drive.StrafeRightDistance(0.75,5); //used to be (0.5,3)
+                drive.StrafeRightDistance(0.75,5);
                 sleep(500);
                 drive.TurnDegrees(0.3,90);
                 sleep(500);
-                //drive.DriveForwardDistance(0.5,5);
-                //sleep(500);
                 drive.DeliverGlyph();
                 break;
             }
@@ -123,8 +120,6 @@ public class BlueRight extends LinearOpMode {
                 sleep(500);
                 drive.TurnDegrees(0.3,90);
                 sleep(500);
-                //drive.DriveForwardDistance(0.5,5);
-                //sleep(500);
                 drive.DeliverGlyph();
                 break;
             }
@@ -135,8 +130,6 @@ public class BlueRight extends LinearOpMode {
                 sleep(500);
                 drive.TurnDegrees(0.3,90);
                 sleep(500);
-                //drive.DriveForwardDistance(0.5,5);
-                //sleep(500);
                 drive.DeliverGlyph();
                 break;
             }
@@ -147,8 +140,6 @@ public class BlueRight extends LinearOpMode {
                 sleep(500);
                 drive.TurnDegrees(0.3,90);
                 sleep(500);
-                //drive.DriveForwardDistance(0.5,5);
-                //sleep(500);
                 drive.DeliverGlyph();
                 break;
             }

@@ -31,9 +31,9 @@ public class BlueLeft extends LinearOpMode {
     float Lt, Rt;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
-    final double RIGHTGrab_CLOSE = 0.33; //used to be 0.4
+    final double RIGHTGrab_CLOSE = 0.33;
     final double LEFTGrab_COMPLETEOPEN = 0.2;
-    final double LEFTGrab_CLOSE = 0.67; //used to be 0.6
+    final double LEFTGrab_CLOSE = 0.67;
     final double RIGHTGrab_OPEN = 0.5;
     final double LEFTGrab_OPEN = 0.5;
     final double RIGHTBottom_CLOSE = 0.3;
@@ -82,8 +82,6 @@ public class BlueLeft extends LinearOpMode {
                 sleep(500);
                 drive. StrafeLeftDistance(0.3,20);
                 sleep(500);
-                //drive. DriveForwardDistance(0.5,12);
-                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }
@@ -98,8 +96,6 @@ public class BlueLeft extends LinearOpMode {
                 sleep(500);
                 drive. StrafeLeftDistance(0.3,4);
                 sleep(500);
-                //drive. DriveForwardDistance(0.5,12);
-                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }
@@ -112,8 +108,6 @@ public class BlueLeft extends LinearOpMode {
                 sleep(500);
                 drive. StrafeLeftDistance(0.3,10);
                 sleep(500);
-                //drive. DriveForwardDistance(0.5,12);
-                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }
@@ -126,8 +120,6 @@ public class BlueLeft extends LinearOpMode {
                 sleep(500);
                 drive. StrafeLeftDistance(0.3,10);
                 sleep(500);
-                //drive. DriveForwardDistance(0.5,12);
-                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }

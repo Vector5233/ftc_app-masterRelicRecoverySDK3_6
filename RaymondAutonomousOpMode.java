@@ -17,13 +17,6 @@ public class RaymondAutonomousOpMode extends Object {
     LinearOpMode opmode;
     float red, green, blue;
 
-    /*final double JEWEL_UP = 0;
-    final double JEWEL_DOWN = 0+0.182;
-    final double JEWEL_RIGHT = 0+0.2382;
-    final double JEWEL_CENTER = 0+0.182;
-    final double JEWEL_LEFT = 0+0.10;
-    */
-
 // Right, left, and center are facing the back of the bot
     final double JEWEL_UP = 0.94;
     final double JEWEL_DOWN = 0.38;
@@ -42,7 +35,7 @@ public class RaymondAutonomousOpMode extends Object {
     }
     public void RedKnocker(){
         LowerJewelKnocker();
-        opmode.sleep(3000);//used to be 2000
+        opmode.sleep(3000);
 
         opmode.telemetry.addData("Red: ", colorSensor.red());
         opmode.telemetry.addData("Blue: ", colorSensor.blue());
@@ -56,7 +49,7 @@ public class RaymondAutonomousOpMode extends Object {
             opmode.sleep(500);
         } else if (colorSensor.red() == 0 && colorSensor.blue() == 0){
             jewelKnocker.setPosition(JEWEL_RETRY);
-            opmode.sleep(3000); //Was reduced
+            opmode.sleep(3000);
             opmode.telemetry.addData("Red: ", colorSensor.red());
             opmode.telemetry.addData("Blue: ", colorSensor.blue());
             opmode.telemetry.update();
@@ -93,7 +86,7 @@ public class RaymondAutonomousOpMode extends Object {
 
     public void BlueKnocker() {
         LowerJewelKnocker();
-        opmode.sleep(3000);//used to be 2000
+        opmode.sleep(3000);
         opmode.telemetry.addData("Red: ", colorSensor.red());
         opmode.telemetry.addData("Blue: ", colorSensor.blue());
         opmode.telemetry.update();
@@ -106,7 +99,7 @@ public class RaymondAutonomousOpMode extends Object {
             opmode.sleep(500);
         } else if (colorSensor.red() == 0 && colorSensor.blue() == 0){
             jewelKnocker.setPosition(JEWEL_RETRY);
-            opmode.sleep(3000); //Was reduced
+            opmode.sleep(3000);
             opmode.telemetry.addData("Red: ", colorSensor.red());
             opmode.telemetry.addData("Blue: ", colorSensor.blue());
             opmode.telemetry.update();

@@ -59,9 +59,9 @@ public class RedRight extends LinearOpMode {
     float Lt, Rt;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
-    final double RIGHTGrab_CLOSE = 0.33; //used to be 0.4
+    final double RIGHTGrab_CLOSE = 0.33;
     final double LEFTGrab_COMPLETEOPEN = 0.2;
-    final double LEFTGrab_CLOSE = 0.67; //used to be 0.6
+    final double LEFTGrab_CLOSE = 0.67;
     final double RIGHTGrab_OPEN = 0.5;
     final double LEFTGrab_OPEN = 0.5;
     final double RIGHTBottom_CLOSE = 0.3;
@@ -76,15 +76,11 @@ public class RedRight extends LinearOpMode {
     final double JEWEL_CENTER = 0.15;
     final double JEWEL_LEFT = 0.1;
 
-    //double RaiseArm = 1.0;
-    //double LowerArm = 0.0;
-
     OpenGLMatrix lastLocation = null;
 
     VuforiaLocalizer vuforia;
 
     @Override public void runOpMode() {
-//strafe too far, or the previous driveforward
         initialization();
         waitForStart();
         RelicRecoveryVuMark vuMark = ReadPictograph();
@@ -101,20 +97,20 @@ public class RedRight extends LinearOpMode {
 
 
         switch (vuMark){
+            //test again
             case LEFT: {
                 drive. DriveForwardDistance(0.5,25);
                 sleep(500);
                 drive. TurnDegrees(0.5,-90);
                 sleep(500);
-                drive. DriveForwardDistance(0.5,22); //previously 25
+                drive. DriveForwardDistance(0.5,22);
                 sleep(500);
-                drive. StrafeRightDistance(0.4,4);
+                drive. StrafeRightDistance(0.4,5);
                 sleep(500);
-                //drive. DriveForwardDistance(0.5,12);
-                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }
+            //test again
             case RIGHT: {
                 drive. DriveForwardDistance(0.5,25);
                 sleep(500);
@@ -122,10 +118,8 @@ public class RedRight extends LinearOpMode {
                 sleep(500);
                 drive. DriveForwardDistance(0.5, 22);
                 sleep(500);
-                drive. StrafeRightDistance(0.3,15);//previously 20
+                drive. StrafeRightDistance(0.3,15);
                 sleep(500);
-                //drive. DriveForwardDistance(0.5,12);
-                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }
@@ -138,8 +132,6 @@ public class RedRight extends LinearOpMode {
                 sleep(500);
                 drive. StrafeRightDistance(0.3,10);
                 sleep(500);
-                //drive. DriveForwardDistance(0.5,12);
-                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }
@@ -152,8 +144,6 @@ public class RedRight extends LinearOpMode {
                 sleep(500);
                 drive. StrafeRightDistance(0.3,10);
                 sleep(500);
-                //drive. DriveForwardDistance(0.5,12);
-                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }

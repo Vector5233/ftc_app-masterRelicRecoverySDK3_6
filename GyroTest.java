@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -11,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by CCA on 1/10/2018.
  */
 @Autonomous(name="GyroTest")
-
+@Disabled
 public class GyroTest extends LinearOpMode {
     DcMotor frontLeft, liftMotor, frontRight, backLeft, backRight;
     Servo topLeftGrab, topRightGrab, bottomLeftGrab, bottomRightGrab, jewelKnocker, jewelRaiser;
@@ -27,7 +28,6 @@ public class GyroTest extends LinearOpMode {
         initialization();
         waitForStart();
         sleep(100);
-        //drive.TurnToAngle(90);
         drive.StopDriving();
 
 }

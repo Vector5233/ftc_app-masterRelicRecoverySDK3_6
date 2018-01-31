@@ -26,10 +26,6 @@ public class RevRoboticsOp extends OpMode {
 
     float Lt, Rt;
 
-    // final int liftPosition = liftMotor.getCurrentPosition();
-    // Note 1: NO "final" -- that makes liftPosition unchangeable.
-    // Note 2: NO initialization -- liftMotor is not yet defined.
-
     int liftPosition;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
@@ -59,12 +55,10 @@ public class RevRoboticsOp extends OpMode {
         backLeft = hardwareMap.dcMotor.get("backLeft");
         backRight = hardwareMap.dcMotor.get("backRight");
         liftMotor = hardwareMap.dcMotor.get("liftMotor");
-        //gyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "gyro");
 
-        //colorSensor = hardwareMap.colorSensor.get("color");
         jewelKnocker = hardwareMap.servo.get("jewel");
         jewelRaiser = hardwareMap.servo.get("raise");
-        jewelRaiser.setPosition(JEWEL_UP);  //JEWEL_UP
+        jewelRaiser.setPosition(JEWEL_UP);
         jewelKnocker.setPosition(JEWEL_CENTER);
 
         topRightGrab = hardwareMap.servo.get("topRightGrab");
@@ -93,113 +87,28 @@ public class RevRoboticsOp extends OpMode {
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         liftBottom = liftMotor.getCurrentPosition();
     }
 
     public void loop() {
-// 2 Drive: movement + tasks
-        /*red = colorSensor.red();
-        green = colorSensor.green();
-        blue = colorSensor.blue();
-        */
-
-        /*telemetry.addData("Red: ", red);
-        telemetry.addData("Green: ", green);
-        telemetry.addData("Blue: ", blue);*/
-        //telemetry.addData("gyro: ",gyro.getIntegratedZValue());
-        //telemetry.addData("Front Left:", gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x);
-        //telemetry.addData("Back Right:", gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x);
-
-       /* if (gamepad1.dpad_up){
-
-            frontLeft.setPower(1.0);
-            frontRight.setPower(1.0);
-            backLeft.setPower(1.0);
-            backRight.setPower(1.0);
-
-        }
-
-        if (gamepad1.dpad_down){
-
-            frontLeft.setPower(-1.0);
-            frontRight.setPower(-1.0);
-            backLeft.setPower(-1.0);
-            backRight.setPower(-1.0);
-        }*/
-
-       // TODO: Fix logic on strafe  DONE
-     /*   if (gamepad1.x) {
-
-            frontLeft.setPower(-0.5);
-            frontRight.setPower(0.5);
-            backLeft.setPower(0.5);
-            backRight.setPower(-0.5);
-
-        }
-
-        else if (gamepad1.b) {
-
-            frontLeft.setPower(0.5);
-            frontRight.setPower(-0.5);
-            backRight.setPower(0.5);
-            backLeft.setPower(-0.5);
-
-        }*/
-        //else {
             frontLeft.setPower(-gamepad1.left_stick_y+gamepad1.left_stick_x + gamepad1.right_stick_x);
             frontRight.setPower(-gamepad1.left_stick_y-gamepad1.left_stick_x - gamepad1.right_stick_x);
             backLeft.setPower(-gamepad1.left_stick_y-gamepad1.left_stick_x + gamepad1.right_stick_x);
             backRight.setPower(-gamepad1.left_stick_y+gamepad1.left_stick_x - gamepad1.right_stick_x);
-        //}
 
-        /*if (gamepad2.a) {
-            jewelRaiser.setPosition(JEWEL_DOWN);
-        } else if (gamepad2.b) {
-            jewelRaiser.setPosition(JEWEL_UP);
-        }
-
-
-        if (gamepad2.x&&gamepad2.y ) {
-            myTimer.reset();
-            jewelKnocker.setPosition(JEWEL_CENTER);
-        }
-        else if (gamepad2.x && (myTimer.time() > 200)) {
-            jewelKnocker.setPosition(JEWEL_LEFT);
-        }
-        else if (gamepad2.y && (myTimer.time() > 200)) {
-            jewelKnocker.setPosition(JEWEL_RIGHT);
-        }
-*/
-
-        // trivial change
         if (gamepad2.dpad_up) {
-            /*liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            liftMotor.getCurrentPosition();
-            liftPosition = liftMotor.getCurrentPosition();*/
             liftMotor.setPower(0.9);
         } else if (gamepad2.dpad_down) {
-            /*liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            liftPosition = liftMotor.getCurrentPosition();*/
             if (liftMotor.getCurrentPosition()<= liftBottom) {
                 ;
             } else {
                 liftMotor.setPower(-0.9);
             }
         } else {
-           /*liftMotor.setPower(0);
-            liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            liftMotor.setTargetPosition(liftPosition);*/
             liftMotor.setPower(0.05);
         }
-        //can also do joystick
-        //options to fix lift fall--1. set small power to motor (.05), 2. use elastics to counter weight
 
-
-        //Binary system for grabbers
-
-        //if (gamepad2.left_bumper && gamepad2.right_bumper) {
         if (gamepad2.y){
             topRightGrab.setPosition(RIGHTGrab_COMPLETEOPEN);
             topLeftGrab.setPosition(LEFTGrab_COMPLETEOPEN);

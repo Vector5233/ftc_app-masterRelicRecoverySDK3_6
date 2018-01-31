@@ -32,9 +32,9 @@ public class RedLeft extends LinearOpMode {
     float Lt, Rt;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
-    final double RIGHTGrab_CLOSE = 0.33; //used to be 0.4
+    final double RIGHTGrab_CLOSE = 0.33;
     final double LEFTGrab_COMPLETEOPEN = 0.2;
-    final double LEFTGrab_CLOSE = 0.67; //used to be 0.6
+    final double LEFTGrab_CLOSE = 0.67;
     final double RIGHTGrab_OPEN = 0.5;
     final double LEFTGrab_OPEN = 0.5;
     final double RIGHTBottom_CLOSE = 0.3;
@@ -72,22 +72,19 @@ public class RedLeft extends LinearOpMode {
         sleep(500);
         liftMotor.setPower(0.0);
         ray.RedKnocker();
-        //sleep(500); //redundant
         drive.DriveForwardDistance(0.3,1);
         sleep(500);
-        drive.TurnDegrees(0.2, -90); //see blue right
+        drive.TurnDegrees(0.2, -90);
         sleep(500);
 
         switch (vuMark) {
             case LEFT: {
                 drive.DriveForwardDistance(0.5,38);
                 sleep(500);
-                drive.StrafeLeftDistance(0.75,5); // didnt mirror
+                drive.StrafeLeftDistance(0.75,5);
                 sleep(500);
                 drive.TurnDegrees(0.3,-90);
                 sleep(500);
-                //drive.DriveForwardDistance(0.5,5);
-                //sleep(500);
                 drive.DeliverGlyph();
                 break;
             }
@@ -98,8 +95,6 @@ public class RedLeft extends LinearOpMode {
                 sleep(500);
                 drive.TurnDegrees(0.3,-90);
                  sleep(500);
-                //drive.DriveForwardDistance(0.5,5);
-                //sleep(500);
                 drive.DeliverGlyph();
                 break;
             }
@@ -110,8 +105,6 @@ public class RedLeft extends LinearOpMode {
                 sleep(500);
                 drive.TurnDegrees(0.3,-90);
                 sleep(500);
-                //drive.DriveForwardDistance(0.5,5);
-                //sleep(500);
                 drive.DeliverGlyph();
                 break;
             }
@@ -122,8 +115,6 @@ public class RedLeft extends LinearOpMode {
                 sleep(500);
                 drive.TurnDegrees(0.3,-90);
                 sleep(500);
-                //drive.DriveForwardDistance(0.5,5);
-                //sleep(500);
                 drive.DeliverGlyph();
                 break;
             }
