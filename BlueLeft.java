@@ -31,11 +31,13 @@ public class BlueLeft extends LinearOpMode {
     float Lt, Rt;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
-    final double RIGHTGrab_CLOSE = 0.35; //used to be 0.4
+    final double RIGHTGrab_CLOSE = 0.33; //used to be 0.4
     final double LEFTGrab_COMPLETEOPEN = 0.2;
-    final double LEFTGrab_CLOSE = 0.65; //used to be 0.6
+    final double LEFTGrab_CLOSE = 0.67; //used to be 0.6
     final double RIGHTGrab_OPEN = 0.5;
     final double LEFTGrab_OPEN = 0.5;
+    final double RIGHTBottom_CLOSE = 0.3;
+    final double LEFTBottom_CLOSE = 0.7;
 
     final double SPROCKET_RATIO = 2.0/3.0;
     final double TICKS_PER_INCH = SPROCKET_RATIO*(1120.0/(2*2*3.14159));
@@ -60,8 +62,8 @@ public class BlueLeft extends LinearOpMode {
         sleep(1000);
         topRightGrab.setPosition(RIGHTGrab_CLOSE);
         topLeftGrab.setPosition(LEFTGrab_CLOSE);
-        bottomRightGrab.setPosition(LEFTGrab_CLOSE);
-        bottomLeftGrab.setPosition(RIGHTGrab_CLOSE);
+        bottomRightGrab.setPosition(LEFTBottom_CLOSE);
+        bottomLeftGrab.setPosition(RIGHTBottom_CLOSE);
         sleep(500);
         liftMotor.setPower(1.0);
         sleep(500);
@@ -145,6 +147,8 @@ public class BlueLeft extends LinearOpMode {
         jewelKnocker = hardwareMap.servo.get("jewel");
         jewelRaiser = hardwareMap.servo.get("raise");
         jewelRaiser.setPosition(JEWEL_UP);
+        jewelKnocker.setPosition(JEWEL_CENTER);
+        gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
 
         topRightGrab = hardwareMap.servo.get("topRightGrab");
         topLeftGrab = hardwareMap.servo.get("topLeftGrab");

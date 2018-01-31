@@ -51,6 +51,8 @@ public class RevRoboticsOp extends OpMode {
     final double JEWEL_LEFT = 0.05;
     final double JEWEL_RETRY = 0.12;
 
+    double liftBottom;
+
     public void init() {
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
         frontRight = hardwareMap.dcMotor.get("frontRight");
@@ -93,6 +95,7 @@ public class RevRoboticsOp extends OpMode {
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         //liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        liftBottom = liftMotor.getCurrentPosition();
     }
 
     public void loop() {
@@ -179,7 +182,11 @@ public class RevRoboticsOp extends OpMode {
         } else if (gamepad2.dpad_down) {
             /*liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             liftPosition = liftMotor.getCurrentPosition();*/
-            liftMotor.setPower(-0.9);
+            if (liftMotor.getCurrentPosition()<= liftBottom) {
+                ;
+            } else {
+                liftMotor.setPower(-0.9);
+            }
         } else {
            /*liftMotor.setPower(0);
             liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);

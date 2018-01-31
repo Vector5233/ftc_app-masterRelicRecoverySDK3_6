@@ -4,6 +4,7 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.Timer;
 
@@ -128,6 +129,7 @@ public class Drive extends Object {
         else{
 
         }
+
         opmode.telemetry.addData("Gyro end correct", gyro.getIntegratedZValue());
         opmode.telemetry.update();
     }
@@ -194,6 +196,7 @@ public class Drive extends Object {
 
         // distance in inches
         //conjecture instead of moving 12", wheels will go 12"*cos(45)= 8.5"
+        ElapsedTime rightTime = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
         int ticks = (int) (distance * TICKS_PER_INCH);
         if (power > 0.65) {
             power = 0.65;
@@ -218,13 +221,23 @@ public class Drive extends Object {
 
         SetModeAll(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontLeft.setPower(power);
-        frontRight.setPower(power);
-        backLeft.setPower(power);
-        backRight.setPower(power);
+        rightTime.reset();
+        rightTime.startTime();
 
+        while (frontRight.isBusy() && frontLeft.isBusy()) {
 
-        while (frontRight.isBusy() && frontLeft.isBusy()) ;
+            if (rightTime.seconds() < power) {
+                frontLeft.setPower(rightTime.seconds());
+                frontRight.setPower(rightTime.seconds());
+                backLeft.setPower(rightTime.seconds());
+                backRight.setPower(rightTime.seconds());
+            } else {
+                frontLeft.setPower(power);
+                frontRight.setPower(power);
+                backLeft.setPower(power);
+                backRight.setPower(power);
+            }
+        }
 
         StopDriving();
     }
@@ -232,6 +245,7 @@ public class Drive extends Object {
     public void StrafeLeftDistance(double power, double distance) {
         // distance in inches
         //conjecture instead of moving 12", wheels will go 12"*cos(45)= 8.5"
+        ElapsedTime leftTime = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
         int ticks = (int) (distance * TICKS_PER_INCH);
         if (power > 0.65) {
             power = 0.65;
@@ -256,12 +270,23 @@ public class Drive extends Object {
 
         SetModeAll(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontLeft.setPower(power);
-        frontRight.setPower(power);
-        backLeft.setPower(power);
-        backRight.setPower(power);
+        leftTime.reset();
+        leftTime.startTime();
 
-        while (frontRight.isBusy() && frontLeft.isBusy()) ;
+        while (frontRight.isBusy() && frontLeft.isBusy()) {
+            if (leftTime.seconds() < power) {
+                frontLeft.setPower(leftTime.seconds());
+                frontRight.setPower(leftTime.seconds());
+                backLeft.setPower(leftTime.seconds());
+                backRight.setPower(leftTime.seconds());
+            }
+
+            else {
+                frontLeft.setPower(power);
+                frontRight.setPower(power);
+                backLeft.setPower(power);
+                backRight.setPower(power);}
+        }
 
         StopDriving();
     }
@@ -416,7 +441,7 @@ public class Drive extends Object {
 
     public void DeliverGlyph() {
         liftMotor.setDirection(DcMotor.Direction.FORWARD); //FORWARD Raises Lift
-        opmode.sleep(700);
+        // opmode.sleep(700); //Unnecessary
         liftMotor.setPower(-1.0);
         opmode.sleep(500);
         bottomLeftGrab.setPosition(RIGHTGrab_OPEN);
@@ -424,7 +449,7 @@ public class Drive extends Object {
         opmode.sleep(250);
         liftMotor.setPower(0.0);
         opmode.sleep(500);
-        DriveForwardTime(0.5, 2000);
+        DriveForwardTime(0.5, 1000); //Could be reduced up to 50%
         opmode.sleep(500);
         DriveBackwardDistance(1, 6); // can back up more
         StopDriving();

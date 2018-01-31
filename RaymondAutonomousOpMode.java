@@ -42,7 +42,7 @@ public class RaymondAutonomousOpMode extends Object {
     }
     public void RedKnocker(){
         LowerJewelKnocker();
-        opmode.sleep(4500);//used to be 2000
+        opmode.sleep(3000);//used to be 2000
 
         opmode.telemetry.addData("Red: ", colorSensor.red());
         opmode.telemetry.addData("Blue: ", colorSensor.blue());
@@ -56,7 +56,7 @@ public class RaymondAutonomousOpMode extends Object {
             opmode.sleep(500);
         } else if (colorSensor.red() == 0 && colorSensor.blue() == 0){
             jewelKnocker.setPosition(JEWEL_RETRY);
-            opmode.sleep(4500);
+            opmode.sleep(3000); //Was reduced
             opmode.telemetry.addData("Red: ", colorSensor.red());
             opmode.telemetry.addData("Blue: ", colorSensor.blue());
             opmode.telemetry.update();
@@ -105,9 +105,34 @@ public class RaymondAutonomousOpMode extends Object {
             RaiseJewelKnocker();
             opmode.sleep(500);
         } else if (colorSensor.red() == 0 && colorSensor.blue() == 0){
-            RaiseJewelKnocker();
-            opmode.sleep(500);
-         } else {
+            jewelKnocker.setPosition(JEWEL_RETRY);
+            opmode.sleep(3000); //Was reduced
+            opmode.telemetry.addData("Red: ", colorSensor.red());
+            opmode.telemetry.addData("Blue: ", colorSensor.blue());
+            opmode.telemetry.update();
+            if (colorSensor.blue() > colorSensor.red()) {
+                jewelKnocker.setPosition(JEWEL_RIGHT);
+                opmode.sleep(500);
+                jewelKnocker.setPosition(JEWEL_CENTER);
+                opmode.sleep(500);
+                RaiseJewelKnocker();
+                opmode.sleep(500);
+            }
+            else if (colorSensor.red() == 0 && colorSensor.blue() == 0) {
+                RaiseJewelKnocker();
+                opmode.sleep(500);
+            }
+            else {
+                jewelKnocker.setPosition(JEWEL_LEFT);
+                opmode.sleep(500);
+                jewelKnocker.setPosition(JEWEL_CENTER);
+                opmode.sleep(500);
+                RaiseJewelKnocker();
+                opmode.sleep(500);
+
+         }
+        }
+         else {
             jewelKnocker.setPosition(JEWEL_LEFT);
             opmode.sleep(500);
             jewelKnocker.setPosition(JEWEL_CENTER);

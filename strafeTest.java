@@ -1,31 +1,3 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided that
- * the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list
- * of conditions and the following disclaimer.
- *
- * Redistributions in binary form must reproduce the above copyright notice, this
- * list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution.
- *
- * Neither the name of FIRST nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
- * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
@@ -34,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
@@ -42,9 +15,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
-@Autonomous(name="BlueRight", group ="Concept")
+/**
+ * Created by CCA on 1/30/2018.
+ */
+/*
+public class strafeTest {}@Autonomous(name="strafeTest", group ="mygroup")
 
-public class BlueRight extends LinearOpMode {
+public class strafeTest extends LinearOpMode {
     public static final String TAG = "Vuforia VuMark Sample";
 
     DcMotor frontLeft, frontRight, backLeft, backRight, liftMotor;
@@ -67,6 +44,7 @@ public class BlueRight extends LinearOpMode {
     final double RIGHTBottom_CLOSE = 0.3;
     final double LEFTBottom_CLOSE = 0.7;
 
+
     final double SPROCKET_RATIO = 2.0 / 3.0;
     final double TICKS_PER_INCH = SPROCKET_RATIO * (1120.0 / (2 * 2 * 3.14159));
 
@@ -77,13 +55,14 @@ public class BlueRight extends LinearOpMode {
     final double JEWEL_CENTER = 0.15;
     final double JEWEL_LEFT = 0.05;
     final double JEWEL_RETRY = 0.12;
+
+
     OpenGLMatrix lastLocation = null;
 
     VuforiaLocalizer vuforia;
 
     @Override
     public void runOpMode() {
-        //platform not balanced, drivebackward should have more distance, slide while turning left, drive forward should be further
         initialization();
         waitForStart();
         RelicRecoveryVuMark vuMark = ReadPictograph();
@@ -96,20 +75,20 @@ public class BlueRight extends LinearOpMode {
         liftMotor.setPower(1.0);
         sleep(500);
         liftMotor.setPower(0.0);
-        ray.BlueKnocker();
-        //sleep(500); //Redundant
+        ray.RedKnocker();
+        sleep(500);
         drive.DriveForwardDistance(0.3,1);
         sleep(500);
-        drive.TurnDegrees(0.2, 90); //used to 86
+        drive.TurnDegrees(0.2, -90); //see blue right
         sleep(500);
 
         switch (vuMark) {
             case LEFT: {
-                drive.DriveForwardDistance(0.5,23);//used to be 26
+                drive.DriveForwardDistance(0.5,38);
                 sleep(500);
-                drive.StrafeRightDistance(0.75,5); //used to be (0.5,3)
+                drive.StrafeLeftDistance(0.75,5); // didnt mirror
                 sleep(500);
-                drive.TurnDegrees(0.3,90);
+                drive.TurnDegrees(0.3,-90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -117,11 +96,11 @@ public class BlueRight extends LinearOpMode {
                 break;
             }
             case RIGHT: {
-                drive.DriveForwardDistance(0.5,38);
+                drive.DriveForwardDistance(0.5,26);
                 sleep(500);
-                drive.StrafeRightDistance(0.75,5);
+                drive.StrafeLeftDistance(0.75,5);
                 sleep(500);
-                drive.TurnDegrees(0.3,90);
+                drive.TurnDegrees(0.3,-90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -129,11 +108,11 @@ public class BlueRight extends LinearOpMode {
                 break;
             }
             case CENTER: {
-                drive.DriveForwardDistance(0.5,30);
+                drive.DriveForwardDistance(0.5,32);
                 sleep(500);
-                drive.StrafeRightDistance(0.75,5);
+                drive.StrafeLeftDistance(0.75,5);
                 sleep(500);
-                drive.TurnDegrees(0.3,90);
+                drive.TurnDegrees(0.3,-90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -141,11 +120,11 @@ public class BlueRight extends LinearOpMode {
                 break;
             }
             default: {
-                drive.DriveForwardDistance(0.5,30);
+                drive.DriveForwardDistance(0.5,32);
                 sleep(500);
-                drive.StrafeRightDistance(0.75,5);
+                drive.StrafeLeftDistance(0.75,5);
                 sleep(500);
-                drive.TurnDegrees(0.3,90);
+                drive.TurnDegrees(0.3,-90);
                 sleep(500);
                 //drive.DriveForwardDistance(0.5,5);
                 //sleep(500);
@@ -162,6 +141,7 @@ public class BlueRight extends LinearOpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
         liftMotor = hardwareMap.dcMotor.get("liftMotor");
 
+
         colorSensor = hardwareMap.colorSensor.get("color");
         jewelKnocker = hardwareMap.servo.get("jewel");
         jewelRaiser = hardwareMap.servo.get("raise");
@@ -171,12 +151,13 @@ public class BlueRight extends LinearOpMode {
 
         topRightGrab = hardwareMap.servo.get("topRightGrab");
         topLeftGrab = hardwareMap.servo.get("topLeftGrab");
-        bottomRightGrab = hardwareMap.servo.get("bottomRightGrab");
         bottomLeftGrab = hardwareMap.servo.get("bottomLeftGrab");
+        bottomLeftGrab = hardwareMap.servo.get("bottomRightGrab");
+
         topRightGrab.setPosition(RIGHTGrab_COMPLETEOPEN);
         topLeftGrab.setPosition(LEFTGrab_COMPLETEOPEN);
-        bottomLeftGrab.setPosition(RIGHTGrab_COMPLETEOPEN);
         bottomRightGrab.setPosition(LEFTGrab_COMPLETEOPEN);
+        bottomLeftGrab.setPosition(RIGHTGrab_COMPLETEOPEN);
 
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.FORWARD);
@@ -191,8 +172,6 @@ public class BlueRight extends LinearOpMode {
 
         drive = new Drive(frontLeft, frontRight, backLeft, backRight, liftMotor, gyro, topLeftGrab, topRightGrab, bottomLeftGrab, bottomRightGrab, this);
         ray = new RaymondAutonomousOpMode(drive, jewelKnocker, jewelRaiser, colorSensor, this);
-
-
     }
 
 
@@ -236,3 +215,30 @@ public class BlueRight extends LinearOpMode {
     }
 }
 
+
+    public void StrafeRightDistance(double power, double distance) {
+
+        // distance in inches
+        //conjecture instead of moving 12", wheels will go 12"*cos(45)= 8.5"
+        ElapsedTime rightTime = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+        int ticks = (int) (distance * TICKS_PER_INCH);
+        if (power > 0.65) {
+            power = 0.65;
+        }
+
+        /*frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);*/
+
+/*        SetModeAll(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontLeft.setTargetPosition(ticks);
+        frontRight.setTargetPosition(-ticks);
+        backLeft.setTargetPosition(-ticks);
+        backRight.setTargetPosition(ticks);
+
+        /*frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);*/
