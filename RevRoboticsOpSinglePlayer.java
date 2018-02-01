@@ -145,7 +145,7 @@ public class RevRoboticsOpSinglePlayer extends OpMode {
             bottomLeftGrab.setPosition(RIGHTGrab_CLOSE);
             bottomRightGrab.setPosition(LEFTGrab_CLOSE);
         } else {
-            //nothing
+
         }
     }
 }

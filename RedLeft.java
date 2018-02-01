@@ -89,7 +89,7 @@ public class RedLeft extends LinearOpMode {
                 break;
             }
             case RIGHT: {
-                drive.DriveForwardDistance(0.5,26);
+                drive.DriveForwardDistance(0.5,23);
                 sleep(500);
                 drive.StrafeLeftDistance(0.75,5);
                 sleep(500);
@@ -99,7 +99,7 @@ public class RedLeft extends LinearOpMode {
                 break;
             }
             case CENTER: {
-                drive.DriveForwardDistance(0.5,32);
+                drive.DriveForwardDistance(0.5,30);
                 sleep(500);
                 drive.StrafeLeftDistance(0.75,5);
                 sleep(500);
@@ -109,7 +109,7 @@ public class RedLeft extends LinearOpMode {
                 break;
             }
             default: {
-                drive.DriveForwardDistance(0.5,32);
+                drive.DriveForwardDistance(0.5,30);
                 sleep(500);
                 drive.StrafeLeftDistance(0.75,5);
                 sleep(500);

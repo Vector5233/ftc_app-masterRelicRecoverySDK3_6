@@ -108,9 +108,9 @@ public class Drive extends Object {
         opmode.telemetry.addData("Gyro start correct", g);
         opmode.telemetry.update();
         if (g > target + TOLERANCE){
-            TurnRightDegree(0.3, g - target);
+            TurnRightDegree(0.5, g - target);//power 0.3
         } else if (g < target - TOLERANCE){
-            TurnLeftDegree(0.3, target - g);
+            TurnLeftDegree(0.5, target - g); //power 0.3
         }
         else{
 
@@ -159,9 +159,9 @@ public class Drive extends Object {
         opmode.telemetry.addData("Gyro", g);
         opmode.telemetry.update();
         if (g > target + TOLERANCE) {
-            TurnRightDegree(0.3, g - target);
+            TurnRightDegree(0.5, g - target); //power 0.3
         } else if (g < target - TOLERANCE) {
-            TurnLeftDegree(0.3, target - g);
+            TurnLeftDegree(0.5, target - g); //power 0.3
         }
         else {
         }

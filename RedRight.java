@@ -105,8 +105,8 @@ public class RedRight extends LinearOpMode {
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22);
                 sleep(500);
-                drive. StrafeRightDistance(0.4,5);
-                sleep(500);
+                //drive. StrafeLeftDistance(0.4,2) ; //StrafeRightDistance(0.4,5)
+                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }
@@ -118,7 +118,7 @@ public class RedRight extends LinearOpMode {
                 sleep(500);
                 drive. DriveForwardDistance(0.5, 22);
                 sleep(500);
-                drive. StrafeRightDistance(0.3,15);
+                drive. StrafeRightDistance(0.3,15); //StrafeRightDistance(0.3,17);
                 sleep(500);
                 drive. DeliverGlyph();
                 break;
@@ -130,7 +130,7 @@ public class RedRight extends LinearOpMode {
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22);
                 sleep(500);
-                drive. StrafeRightDistance(0.3,10);
+                drive. StrafeRightDistance(0.3,9); //StrafeRightDistance(0.3,7);
                 sleep(500);
                 drive. DeliverGlyph();
                 break;
@@ -142,7 +142,7 @@ public class RedRight extends LinearOpMode {
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22);
                 sleep(500);
-                drive. StrafeRightDistance(0.3,10);
+                drive. StrafeRightDistance(0.3,9); //StrafeRightDistance(0.3,7);
                 sleep(500);
                 drive. DeliverGlyph();
                 break;

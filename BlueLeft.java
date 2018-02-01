@@ -80,7 +80,7 @@ public class BlueLeft extends LinearOpMode {
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22);
                 sleep(500);
-                drive. StrafeLeftDistance(0.3,20);
+                drive. StrafeLeftDistance(0.3,15);
                 sleep(500);
                 drive. DeliverGlyph();
                 break;
@@ -94,8 +94,8 @@ public class BlueLeft extends LinearOpMode {
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22);
                 sleep(500);
-                drive. StrafeLeftDistance(0.3,4);
-                sleep(500);
+                //drive. StrafeLeftDistance(0.3,4);
+                //sleep(500);
                 drive. DeliverGlyph();
                 break;
             }
@@ -106,7 +106,7 @@ public class BlueLeft extends LinearOpMode {
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22);
                 sleep(500);
-                drive. StrafeLeftDistance(0.3,10);
+                drive. StrafeLeftDistance(0.3,9);
                 sleep(500);
                 drive. DeliverGlyph();
                 break;
@@ -118,7 +118,7 @@ public class BlueLeft extends LinearOpMode {
                 sleep(500);
                 drive. DriveForwardDistance(0.5,22);
                 sleep(500);
-                drive. StrafeLeftDistance(0.3,10);
+                drive. StrafeLeftDistance(0.3,9);
                 sleep(500);
                 drive. DeliverGlyph();
                 break;

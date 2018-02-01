@@ -29,15 +29,14 @@ public class RevRoboticsOp extends OpMode {
     int liftPosition;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
-    final double RIGHTGrab_CLOSE = 0.33; //used to be 0.4
+    final double RIGHTGrab_CLOSE = 0.33;
     final double LEFTGrab_COMPLETEOPEN = 0.2;
-    final double LEFTGrab_CLOSE = 0.67; //used to be 0.6
+    final double LEFTGrab_CLOSE = 0.67;
     final double RIGHTGrab_OPEN = 0.5;
     final double LEFTGrab_OPEN = 0.5;
     final double RIGHTBottom_CLOSE = 0.3;
     final double LEFTBottom_CLOSE = 0.7;
     //Bottom grabber values are reverse (put right in left, left in right)
-
 
     // Right, left, and center are facing the back of the bot
     final double JEWEL_UP = 0.94;
@@ -123,7 +122,7 @@ public class RevRoboticsOp extends OpMode {
             bottomLeftGrab.setPosition(RIGHTBottom_CLOSE);
             bottomRightGrab.setPosition(LEFTBottom_CLOSE);
         } else {
-            //nothing
+
         }
     }
 }

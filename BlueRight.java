@@ -102,7 +102,6 @@ public class BlueRight extends LinearOpMode {
         sleep(500);
 
         switch (vuMark) {
-            //test again
             case LEFT: {
                 drive.DriveForwardDistance(0.5,23);
                 sleep(500);
