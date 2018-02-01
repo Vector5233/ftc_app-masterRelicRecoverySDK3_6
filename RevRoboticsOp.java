@@ -99,13 +99,11 @@ public class RevRoboticsOp extends OpMode {
 
         if (gamepad2.dpad_up) {
             liftMotor.setPower(0.9);
-        } else if (gamepad2.dpad_down) {
-            if (liftMotor.getCurrentPosition()<= liftBottom) {
-                ;
-            } else {
+        }
+        else if (gamepad2.dpad_down) {
                 liftMotor.setPower(-0.9);
-            }
-        } else {
+        }
+        else {
             liftMotor.setPower(0.05);
         }
 
