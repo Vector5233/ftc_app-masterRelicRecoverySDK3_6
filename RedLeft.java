@@ -52,12 +52,45 @@ public class RedLeft extends LinearOpMode {
     final double JEWEL_LEFT = 0.05;
     final double JEWEL_RETRY = 0.12;
 
+    final double DRIVE_FORWARD1 = 1;
+    final double STRAFE_LEFT = 5;
+    final double DRIVE_FORWARD_LEFT = 40; //was 38
+    final double DRIVE_FORWARD_RIGHT = 28; //was 27
+    final double DRIVE_FORWARD_CENTER = 33; // was 34
 
     OpenGLMatrix lastLocation = null;
 
     VuforiaLocalizer vuforia;
 
-    @Override
+    double start;
+@Override
+/*
+    public void singChristmasSong()
+    {
+        int christmas = 1;
+        while (christmas <10)
+        {
+            frontLeft.setPower(1.0);
+            frontRight.setPower(1.0);
+            backLeft.setPower(1.0);
+            backRight.setPower(1.0);
+            jewelRaiser.setPosition(JEWEL_DOWN);
+
+            sleep(1000);
+
+            frontLeft.setPower(-1.0);
+            frontRight.setPower(-1.0);
+            backLeft.setPower(-1.0);
+            backRight.setPower(-1.0);
+            jewelRaiser.setPosition(JEWEL_UP);
+            sleep(1000);
+            christmas ++;
+        }
+
+
+
+    }
+    */
     public void runOpMode() {
         initialization();
         waitForStart();
@@ -69,56 +102,63 @@ public class RedLeft extends LinearOpMode {
         bottomLeftGrab.setPosition(RIGHTBottom_CLOSE);
         sleep(500);
         liftMotor.setPower(1.0);
-        sleep(500);
-        liftMotor.setPower(0.0);
+        sleep(250);
+        liftMotor.setPower(0.05);
         ray.RedKnocker();
-        drive.DriveForwardDistance(0.3,1);
+        start = gyro.getIntegratedZValue();
+        drive.DriveForwardDistance(0.3,DRIVE_FORWARD1);
         sleep(500);
-        drive.TurnDegrees(0.2, -90);
+        drive.NewTurnDegrees(0.2, -90,start);
         sleep(500);
 
         switch (vuMark) {
             case LEFT: {
-                drive.DriveForwardDistance(0.5,38);
+                drive.DriveForwardDistance(0.5,DRIVE_FORWARD_LEFT);
                 sleep(500);
-                drive.StrafeLeftDistance(0.75,5);
+                /*drive.StrafeLeftDistance(0.75,STRAFE_LEFT);
                 sleep(500);
-                drive.TurnDegrees(0.3,-90);
+                drive.NewTurnDegrees(0.3,-180,start);
                 sleep(500);
-                drive.DeliverGlyph();
+                drive.DeliverGlyph();*/
                 break;
             }
             case RIGHT: {
-                drive.DriveForwardDistance(0.5,23);
+                drive.DriveForwardDistance(0.5,DRIVE_FORWARD_RIGHT);
                 sleep(500);
-                drive.StrafeLeftDistance(0.75,5);
+                /*drive.StrafeLeftDistance(0.75,STRAFE_LEFT);
                 sleep(500);
-                drive.TurnDegrees(0.3,-90);
+                drive.TurnDegrees(0.3,-180,start);
                  sleep(500);
-                drive.DeliverGlyph();
+                drive.DeliverGlyph();*/
                 break;
             }
             case CENTER: {
-                drive.DriveForwardDistance(0.5,30);
+                drive.DriveForwardDistance(0.5,DRIVE_FORWARD_CENTER);
                 sleep(500);
-                drive.StrafeLeftDistance(0.75,5);
+                /*drive.StrafeLeftDistance(0.75,STRAFE_LEFT);
                 sleep(500);
-                drive.TurnDegrees(0.3,-90);
+                drive.TurnDegrees(0.3,-180,start);
                 sleep(500);
-                drive.DeliverGlyph();
+                drive.DeliverGlyph();*/
                 break;
             }
             default: {
-                drive.DriveForwardDistance(0.5,30);
+                drive.DriveForwardDistance(0.5,DRIVE_FORWARD_CENTER);
                 sleep(500);
-                drive.StrafeLeftDistance(0.75,5);
+                /*drive.StrafeLeftDistance(0.75,STRAFE_LEFT);
                 sleep(500);
-                drive.TurnDegrees(0.3,-90);
+                drive.TurnDegrees(0.3,-180,start);
                 sleep(500);
-                drive.DeliverGlyph();
+                drive.DeliverGlyph();*/
                 break;
             }
         }
+        drive.StrafeLeftDistance(0.75,STRAFE_LEFT);
+        sleep(500);
+        start = gyro.getIntegratedZValue();
+        drive.NewTurnDegrees(0.3,-90,start);
+        sleep(500);
+        drive.DeliverRed();
     }
 
     public void initialization() {
@@ -139,7 +179,7 @@ public class RedLeft extends LinearOpMode {
         topRightGrab = hardwareMap.servo.get("topRightGrab");
         topLeftGrab = hardwareMap.servo.get("topLeftGrab");
         bottomLeftGrab = hardwareMap.servo.get("bottomLeftGrab");
-        bottomLeftGrab = hardwareMap.servo.get("bottomRightGrab");
+        bottomRightGrab = hardwareMap.servo.get("bottomRightGrab");
 
         topRightGrab.setPosition(RIGHTGrab_COMPLETEOPEN);
         topLeftGrab.setPosition(LEFTGrab_COMPLETEOPEN);

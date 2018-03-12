@@ -8,13 +8,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by CCA on 8/16/2017.
  */
 
 @TeleOp(name="RevRoboticsOp", group = "myGroup")
 public class RevRoboticsOp extends OpMode {
-
 
     DcMotor frontLeft, frontRight, backLeft, backRight, liftMotor;
     ColorSensor colorSensor;
@@ -29,13 +30,17 @@ public class RevRoboticsOp extends OpMode {
     int liftPosition;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
-    final double RIGHTGrab_CLOSE = 0.33;
+    final double RIGHTGrab_CLOSE = 0.30; //used to be 0.33
     final double LEFTGrab_COMPLETEOPEN = 0.2;
-    final double LEFTGrab_CLOSE = 0.67;
+    final double LEFTGrab_CLOSE = 0.7; //used to be 0.67
     final double RIGHTGrab_OPEN = 0.5;
     final double LEFTGrab_OPEN = 0.5;
-    final double RIGHTBottom_CLOSE = 0.3;
-    final double LEFTBottom_CLOSE = 0.7;
+    final double RIGHTBottom_CLOSE = 0.4; //used to be 0.27
+    final double LEFTBottom_CLOSE = 0.6; //used to be 0.73
+    final double RIGHTBottom_OPEN= 0.6;
+    final double LEFTBottom_OPEN= 0.4;
+
+
     //Bottom grabber values are reverse (put right in left, left in right)
 
     // Right, left, and center are facing the back of the bot
@@ -45,6 +50,9 @@ public class RevRoboticsOp extends OpMode {
     final double JEWEL_CENTER = 0.15;
     final double JEWEL_LEFT = 0.05;
     final double JEWEL_RETRY = 0.12;
+    final double JEWEL_R_REST = 0.7;
+    final double JEWEL_K_REST = 0.7;
+
 
     double liftBottom;
 
@@ -59,7 +67,6 @@ public class RevRoboticsOp extends OpMode {
         jewelRaiser = hardwareMap.servo.get("raise");
         jewelRaiser.setPosition(JEWEL_UP);
         jewelKnocker.setPosition(JEWEL_CENTER);
-
         topRightGrab = hardwareMap.servo.get("topRightGrab");
         topLeftGrab = hardwareMap.servo.get("topLeftGrab");
         bottomLeftGrab = hardwareMap.servo.get("bottomLeftGrab");
@@ -91,13 +98,15 @@ public class RevRoboticsOp extends OpMode {
     }
 
     public void loop() {
+            //jewelKnocker.setPosition(JEWEL_K_REST);
+
             frontLeft.setPower(-gamepad1.left_stick_y+gamepad1.left_stick_x + gamepad1.right_stick_x);
             frontRight.setPower(-gamepad1.left_stick_y-gamepad1.left_stick_x - gamepad1.right_stick_x);
             backLeft.setPower(-gamepad1.left_stick_y-gamepad1.left_stick_x + gamepad1.right_stick_x);
             backRight.setPower(-gamepad1.left_stick_y+gamepad1.left_stick_x - gamepad1.right_stick_x);
 
         if (gamepad2.dpad_up) {
-            liftMotor.setPower(0.9);
+            liftMotor.setPower(1.0);
         }
         else if (gamepad2.dpad_down) {
                 liftMotor.setPower(-0.9);
@@ -114,8 +123,8 @@ public class RevRoboticsOp extends OpMode {
         } else if (gamepad2.left_bumper) {
             topRightGrab.setPosition(RIGHTGrab_OPEN);
             topLeftGrab.setPosition(LEFTGrab_OPEN);
-            bottomLeftGrab.setPosition(RIGHTGrab_OPEN);
-            bottomRightGrab.setPosition(LEFTGrab_OPEN);
+            bottomLeftGrab.setPosition(RIGHTBottom_OPEN);
+            bottomRightGrab.setPosition(LEFTBottom_OPEN);
         } else if (gamepad2.right_bumper) {
             topRightGrab.setPosition(RIGHTGrab_CLOSE);
             topLeftGrab.setPosition(LEFTGrab_CLOSE);
@@ -124,5 +133,13 @@ public class RevRoboticsOp extends OpMode {
         } else {
 
         }
+        if (gamepad2.a) {
+            jewelRaiser.setPosition(JEWEL_UP);
+        }
+
+         if (gamepad2.b) {
+            jewelKnocker.setPosition(JEWEL_K_REST);
+        }
+
     }
-}
+    }

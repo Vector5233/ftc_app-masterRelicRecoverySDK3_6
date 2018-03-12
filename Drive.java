@@ -1,10 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import java.util.Timer;
 
@@ -18,11 +22,13 @@ public class Drive extends Object {
     Servo jewelKnocker, topLeftGrab, topRightGrab, jewelRaiser, bottomLeftGrab, bottomRightGrab;
     ModernRoboticsI2cGyro gyro;
     LinearOpMode opmode;
+    //ModernRoboticsI2cRangeSensor rangeRight, rangeLeft;
 
     final double SPROCKET_RATIO = 2.0 / 3.0;
     final double TICKS_PER_INCH = SPROCKET_RATIO * (1120.0 / (2 * 2 * 3.14159));
     final double ROBOT_RADIUS = (135 / 103.25) * 5.75 * (90.0/76.0);
     final double TOLERANCE = 2;
+    final double ALLOWANCE = 2;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
     final double RIGHTGrab_CLOSE = 0.35;
@@ -45,27 +51,45 @@ public class Drive extends Object {
         liftMotor = LM;
     }
 
+    public void NewTurnDegrees (double power, double degrees, double start) {
+        if (degrees > 0) {
+            double target;
+            target = start + degrees;
+            TurnLeftDegree(power, degrees);
+            TurnLeftCorrect(target);
+        } else if (degrees < 0) {
+            double target;
+            target = start + degrees;
+            TurnRightDegree(power, -degrees);
+            TurnRightCorrect(target);
+        } else {
+
+
+        }
+    }
+
+
+
     public void TurnDegrees (double power, double degrees) {
         if (degrees > 0){
             double target;
+            target = gyro.getIntegratedZValue() + degrees;
             opmode.telemetry.addData("Left Turn: Gyro", gyro.getIntegratedZValue());
             opmode.telemetry.update();
-            target = gyro.getIntegratedZValue() + degrees;
-
             TurnLeftDegree(power, degrees);
             opmode.sleep(500);
             TurnLeftCorrect(target);
         }
         else if (degrees < 0) {
             double target;
+            target = gyro.getIntegratedZValue() + degrees;
             opmode.telemetry.addData("Right Turn: Gyro", gyro.getIntegratedZValue());
             opmode.telemetry.update();
-            target = gyro.getIntegratedZValue() + degrees;
-
             TurnRightDegree(power, -degrees);
             TurnRightCorrect(target);
         }
         else{
+
         }
     }
 
@@ -296,6 +320,32 @@ public class Drive extends Object {
         StopDriving();
     }
 
+    /*public void BlueStrafeCorrect(double goal) {
+        double d;
+        d = rangeLeft.getDistance(DistanceUnit.INCH);
+        if (d > goal + ALLOWANCE) {
+            StrafeLeftDistance(0.5,d - goal);
+            }
+        else if (d < goal - ALLOWANCE) {
+            StrafeRightDistance(0.5,goal - d);
+            }
+        else {
+        }
+    }
+
+    public void RedStrafeCorrect (double goal) {
+        double d;
+        d = rangeRight.getDistance(DistanceUnit.INCH);
+        if (d > goal + ALLOWANCE) {
+            StrafeRightDistance(0.5,d - goal);
+            }
+        else if (d < goal - ALLOWANCE) {
+            StrafeLeftDistance(0.5,goal - d);
+            }
+        else{
+            }
+    }*/
+
     public void StopDriving() {
 
         frontLeft.setPower(0.0);
@@ -360,8 +410,26 @@ public class Drive extends Object {
         liftMotor.setPower(0.0);
         opmode.sleep(500);
         DriveForwardTime(0.5, 1000);
+        /*opmode.sleep(500);
+        TurnLeftDegree(0.3,20);
+        opmode.sleep(500);
+        DriveBackwardDistance(1, 6);*/
+        StopDriving();
+    }
+
+    public void DeliverRed() {
+        DeliverGlyph();
+        TurnRightDegree(0.3,20);
         opmode.sleep(500);
         DriveBackwardDistance(1, 6);
+        StopDriving();
+    }
+
+    public void DeliverBlue() {
+        DeliverGlyph();
+        TurnLeftDegree(0.3,20);
+        opmode.sleep(500);
+        DriveBackwardDistance(1,6);
         StopDriving();
     }
 

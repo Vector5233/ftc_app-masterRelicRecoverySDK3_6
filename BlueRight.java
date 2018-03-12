@@ -55,7 +55,6 @@ public class BlueRight extends LinearOpMode {
     Drive drive;
     RaymondAutonomousOpMode ray;
 
-
     float Lt, Rt;
 
     final double RIGHTGrab_COMPLETEOPEN = 0.8;
@@ -77,9 +76,16 @@ public class BlueRight extends LinearOpMode {
     final double JEWEL_CENTER = 0.15;
     final double JEWEL_LEFT = 0.05;
     final double JEWEL_RETRY = 0.12;
-    OpenGLMatrix lastLocation = null;
 
+    final double STRAFE_RIGHT = 5;
+    final double DRIVE_FORWARD1 = 1;
+    final double DRIVE_FORWARD_LEFT = 29; //25-->26-->29
+    final double DRIVE_FORWARD_RIGHT = 46;//38 -->42-->48-->46
+    final double DRIVE_FORWARD_CENTER = 37;//30-->38-->37
+
+    OpenGLMatrix lastLocation = null;
     VuforiaLocalizer vuforia;
+    double start;
 
     @Override
     public void runOpMode() {
@@ -93,56 +99,63 @@ public class BlueRight extends LinearOpMode {
         bottomLeftGrab.setPosition(RIGHTBottom_CLOSE);
         sleep(500);
         liftMotor.setPower(1.0);
-        sleep(500);
-        liftMotor.setPower(0.0);
+        sleep(250);
+        liftMotor.setPower(0.05);
         ray.BlueKnocker();
-        drive.DriveForwardDistance(0.3,1);
+        start = gyro.getIntegratedZValue();
+        drive.DriveForwardDistance(0.3,DRIVE_FORWARD1);
         sleep(500);
-        drive.TurnDegrees(0.2, 90);
+        drive.NewTurnDegrees(0.2, 90, start);
         sleep(500);
 
         switch (vuMark) {
             case LEFT: {
-                drive.DriveForwardDistance(0.5,23);
+                drive.DriveForwardDistance(0.5,DRIVE_FORWARD_LEFT);
                 sleep(500);
-                drive.StrafeRightDistance(0.75,5);
+                /*drive.StrafeRightDistance(0.75,STRAFE_RIGHT);
                 sleep(500);
                 drive.TurnDegrees(0.3,90);
                 sleep(500);
-                drive.DeliverGlyph();
+                drive.DeliverGlyph();*/
                 break;
             }
             case RIGHT: {
-                drive.DriveForwardDistance(0.5,38);
+                drive.DriveForwardDistance(0.5,DRIVE_FORWARD_RIGHT);
                 sleep(500);
-                drive.StrafeRightDistance(0.75,5);
+                /*drive.StrafeRightDistance(0.75,STRAFE_RIGHT);
                 sleep(500);
                 drive.TurnDegrees(0.3,90);
                 sleep(500);
-                drive.DeliverGlyph();
+                drive.DeliverGlyph();*/
                 break;
             }
             case CENTER: {
-                drive.DriveForwardDistance(0.5,30);
+                drive.DriveForwardDistance(0.5,DRIVE_FORWARD_CENTER);
                 sleep(500);
-                drive.StrafeRightDistance(0.75,5);
+                /*drive.StrafeRightDistance(0.75,STRAFE_RIGHT);
                 sleep(500);
                 drive.TurnDegrees(0.3,90);
                 sleep(500);
-                drive.DeliverGlyph();
+                drive.DeliverGlyph();*/
                 break;
             }
             default: {
-                drive.DriveForwardDistance(0.5,30);
+                drive.DriveForwardDistance(0.5,DRIVE_FORWARD_CENTER);
                 sleep(500);
-                drive.StrafeRightDistance(0.75,5);
+                /*drive.StrafeRightDistance(0.75,STRAFE_RIGHT);
                 sleep(500);
                 drive.TurnDegrees(0.3,90);
                 sleep(500);
-                drive.DeliverGlyph();
+                drive.DeliverGlyph();*/
                 break;
             }
         }
+        drive.StrafeRightDistance(0.75,STRAFE_RIGHT);
+        sleep(500);
+        start = gyro.getIntegratedZValue();
+        drive.NewTurnDegrees(0.3,90,start);
+        sleep(500);
+        drive.DeliverBlue();
     }
 
     public void initialization() {

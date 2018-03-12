@@ -50,9 +50,17 @@ public class BlueLeft extends LinearOpMode {
     final double JEWEL_LEFT = 0.05;
     final double JEWEL_RETRY = 0.12;
 
+    final double DRIVE_FORWARD1 = 25;
+    final double DRIVE_FORWARD2 = 23; //was 22
+    final double STRAFE_LEFT_LEFT = 20; //Was 31
+    final double STRAFE_LEFT_RIGHT = 2; //Was 11
+    final double STRAFE_LEFT_CENTER = 11; //Was 20
+
     OpenGLMatrix lastLocation = null;
 
     VuforiaLocalizer vuforia;
+
+    double start;
 
     @Override public void runOpMode() {
 
@@ -66,67 +74,48 @@ public class BlueLeft extends LinearOpMode {
         bottomLeftGrab.setPosition(RIGHTBottom_CLOSE);
         sleep(500);
         liftMotor.setPower(1.0);
-        sleep(500);
-        liftMotor.setPower(0.0);
+        sleep(250);
+        liftMotor.setPower(0.05);
         ray.BlueKnocker();
+        start = gyro.getIntegratedZValue();
+        drive. DriveForwardDistance(0.5,DRIVE_FORWARD1);
+        sleep(500);
+        drive. NewTurnDegrees(0.5,90,start);
+        sleep(500);
+        drive. DriveForwardDistance(0.5,DRIVE_FORWARD2);
+        sleep(500);
 
-        switch (vuMark){
+        switch (vuMark) {
             case LEFT: {
                 // Case Left is Case Right in red right
-
-                drive. DriveForwardDistance(0.5,25);
+                drive.StrafeLeftDistance(0.3, STRAFE_LEFT_LEFT);
                 sleep(500);
-                drive. TurnDegrees(0.5,90);
-                sleep(500);
-                drive. DriveForwardDistance(0.5,22);
-                sleep(500);
-                drive. StrafeLeftDistance(0.3,15);
-                sleep(500);
-                drive. DeliverGlyph();
+                //drive. DeliverGlyph();
                 break;
             }
             case RIGHT: {
                 // Case Right is Case Left in red right
-
-                drive. DriveForwardDistance(0.5,25);
+                drive.StrafeLeftDistance(0.3, STRAFE_LEFT_RIGHT);
                 sleep(500);
-                drive. TurnDegrees(0.5,90);
-                sleep(500);
-                drive. DriveForwardDistance(0.5,22);
-                sleep(500);
-                //drive. StrafeLeftDistance(0.3,4);
-                //sleep(500);
-                drive. DeliverGlyph();
+                //drive. DeliverGlyph();
                 break;
             }
             case CENTER: {
-                drive. DriveForwardDistance(0.5,25);
+                drive.StrafeLeftDistance(0.3, STRAFE_LEFT_CENTER);
                 sleep(500);
-                drive. TurnDegrees(0.5,90);
-                sleep(500);
-                drive. DriveForwardDistance(0.5,22);
-                sleep(500);
-                drive. StrafeLeftDistance(0.3,9);
-                sleep(500);
-                drive. DeliverGlyph();
+                //drive. DeliverGlyph();
                 break;
             }
-            default:{
-                drive. DriveForwardDistance(0.5,25);
+            default: {
+                drive.StrafeLeftDistance(0.3, STRAFE_LEFT_CENTER);
                 sleep(500);
-                drive. TurnDegrees(0.5,90);
-                sleep(500);
-                drive. DriveForwardDistance(0.5,22);
-                sleep(500);
-                drive. StrafeLeftDistance(0.3,9);
-                sleep(500);
-                drive. DeliverGlyph();
+                //drive. DeliverGlyph();
                 break;
             }
 
         }
+        drive.DeliverBlue();
     }
-
 
     public void initialization () {
         frontLeft = hardwareMap.dcMotor.get("frontLeft");
@@ -144,6 +133,8 @@ public class BlueLeft extends LinearOpMode {
 
         topRightGrab = hardwareMap.servo.get("topRightGrab");
         topLeftGrab = hardwareMap.servo.get("topLeftGrab");
+        bottomLeftGrab = hardwareMap.servo.get("bottomLeftGrab");
+        bottomRightGrab = hardwareMap.servo.get("bottomRightGrab");
         topRightGrab.setPosition(RIGHTGrab_COMPLETEOPEN);
         topLeftGrab.setPosition(LEFTGrab_COMPLETEOPEN);
         bottomRightGrab.setPosition(LEFTGrab_COMPLETEOPEN);

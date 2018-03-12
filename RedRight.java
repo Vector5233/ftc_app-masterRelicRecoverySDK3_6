@@ -70,15 +70,25 @@ public class RedRight extends LinearOpMode {
     final double SPROCKET_RATIO = 2.0/3.0;
     final double TICKS_PER_INCH = SPROCKET_RATIO*(1120.0/(2*2*3.14159));
 
+    // Right, left, and center are facing the back of the bot
     final double JEWEL_UP = 0.94;
-    final double JEWEL_DOWN = 0.415;
-    final double JEWEL_RIGHT = 0.2;
+    final double JEWEL_DOWN = 0.38;
+    final double JEWEL_RIGHT = 0.25;
     final double JEWEL_CENTER = 0.15;
-    final double JEWEL_LEFT = 0.1;
+    final double JEWEL_LEFT = 0.05;
+    final double JEWEL_RETRY = 0.12;
+
+    final double DRIVE_FORWARD1 = 30;
+    final double DRIVE_FORWARD2 = 22;
+    final double STRAFE_RIGHT_LEFT = 11; //Was 10
+    final double STRAFE_RIGHT_RIGHT = 26; //Was 25 (needs to be increased a little)-->23-->24>26
+    final double STRAFE_RIGHT_CENTER = 18; //Was 18 (needs to be increased a little)-->16-->17>18
 
     OpenGLMatrix lastLocation = null;
 
     VuforiaLocalizer vuforia;
+
+    double start;
 
     @Override public void runOpMode() {
         initialization();
@@ -91,64 +101,48 @@ public class RedRight extends LinearOpMode {
         bottomLeftGrab.setPosition(RIGHTBottom_CLOSE);
         sleep(500);
         liftMotor.setPower(1.0);
-        sleep(500);
-        liftMotor.setPower(0.0);
+        sleep(250);
+        liftMotor.setPower(0.05);
         ray.RedKnocker();
+        start = gyro.getIntegratedZValue();
+        drive. DriveForwardDistance(0.5,DRIVE_FORWARD1);
+        sleep(500);
+        drive. NewTurnDegrees(0.5, -90, start);
+        //drive. TurnDegrees(0.5,-90);
+        sleep(500);
+        drive. DriveForwardDistance(0.5, DRIVE_FORWARD2);
+        sleep(500);
 
 
         switch (vuMark){
-            //test again
             case LEFT: {
-                drive. DriveForwardDistance(0.5,25);
-                sleep(500);
-                drive. TurnDegrees(0.5,-90);
-                sleep(500);
-                drive. DriveForwardDistance(0.5,22);
-                sleep(500);
-                //drive. StrafeLeftDistance(0.4,2) ; //StrafeRightDistance(0.4,5)
-                //sleep(500);
-                drive. DeliverGlyph();
+                drive.StrafeRightDistance(0.3,STRAFE_RIGHT_LEFT);
+                /*sleep(500);
+                drive. DeliverGlyph();*/
                 break;
             }
-            //test again
             case RIGHT: {
-                drive. DriveForwardDistance(0.5,25);
-                sleep(500);
-                drive. TurnDegrees(0.5,-90);
-                sleep(500);
-                drive. DriveForwardDistance(0.5, 22);
-                sleep(500);
-                drive. StrafeRightDistance(0.3,15); //StrafeRightDistance(0.3,17);
-                sleep(500);
-                drive. DeliverGlyph();
+                drive. StrafeRightDistance(0.3,STRAFE_RIGHT_RIGHT);
+                /*sleep(500);
+                drive. DeliverGlyph();*/
                 break;
             }
             case CENTER: {
-                drive. DriveForwardDistance(0.5,25);
-                sleep(500);
-                drive. TurnDegrees(0.5,-90);
-                sleep(500);
-                drive. DriveForwardDistance(0.5,22);
-                sleep(500);
-                drive. StrafeRightDistance(0.3,9); //StrafeRightDistance(0.3,7);
-                sleep(500);
-                drive. DeliverGlyph();
+                drive. StrafeRightDistance(0.3,STRAFE_RIGHT_CENTER);
+                /*sleep(500);
+                drive. DeliverGlyph();*/
                 break;
             }
             default:{
-                drive. DriveForwardDistance(0.5,25);
-                sleep(500);
-                drive. TurnDegrees(0.5,-90);
-                sleep(500);
-                drive. DriveForwardDistance(0.5,22);
-                sleep(500);
-                drive. StrafeRightDistance(0.3,9); //StrafeRightDistance(0.3,7);
-                sleep(500);
-                drive. DeliverGlyph();
+                drive. StrafeRightDistance(0.3,STRAFE_RIGHT_CENTER);
+                /*sleep(500);
+                drive. DeliverGlyph();*/
                 break;
             }
 
         }
+        sleep(500);
+        drive.DeliverRed();
     }
 
 
